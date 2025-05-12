@@ -1,5 +1,5 @@
 akracer==0.0.13
-akshare==1.13.53
+akshare==1.16.90
 altair==5.4.1
 annotated-types==0.7.0
 anyio==4.5.2
