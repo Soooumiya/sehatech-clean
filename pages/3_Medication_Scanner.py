@@ -1,88 +1,87 @@
 import streamlit as st
 from PIL import Image
-import pytesseract
-from transformers import pipeline
-from io import BytesIO
-import base64
 
-# Page Config
-st.set_page_config(page_title="💊 Smart Medication Scanner", layout="centered")
+# Multilingual static content
+LANG = st.session_state.get("language", "en")
 
-# Custom CSS
-st.markdown("""
-    <style>
-    .title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        text-align: center;
-        color: #10b981;
-        margin-top: 1rem;
+WARNINGS = {
+    "en": "⚠️ This page cannot be automatically translated due to medical image and text processing.",
+    "fr": "⚠️ Cette page ne peut pas être traduite automatiquement à cause du traitement d'image et de texte médical.",
+    "ar": "⚠️ لا يمكن ترجمة هذه الصفحة تلقائيًا بسبب معالجة الصور والنصوص الطبية.",
+    "amz": "⚠️ ⵜⵉⵎⵓⵍⵍⴰⵢⵜ ⵜⴰⵎⴰⵣⵉⵖⵜ ⴰⵎⵎⵓⵔ ⴷ ⴰⵙⵙⵓⵎⵜ ⵏ ⵜⵉⴷⵉⵙⵉⵏ."
+}
+
+LABELS = {
+    "en": {
+        "title": "💊 Medication Scanner",
+        "name": "Enter medication name (optional)",
+        "upload": "Upload or take a photo of medication",
+        "analyze": "Analyze",
+        "results": "Medication Information"
+    },
+    "fr": {
+        "title": "💊 Scanner de Médicament",
+        "name": "Entrez le nom du médicament (optionnel)",
+        "upload": "Téléchargez ou prenez une photo du médicament",
+        "analyze": "Analyser",
+        "results": "Informations sur le médicament"
+    },
+    "ar": {
+        "title": "💊 ماسح الأدوية",
+        "name": "أدخل اسم الدواء (اختياري)",
+        "upload": "قم برفع أو التقاط صورة للدواء",
+        "analyze": "تحليل",
+        "results": "معلومات الدواء"
+    },
+    "amz": {
+        "title": "💊 ⵙⴽⴰⵏⴻⵔ ⵏ ⵜⵓⵙⵙⵓⵎⵜ",
+        "name": "ⵓⵙⵏⵉ ⵏ ⵜⵓⵙⵙⵓⵎⵜ (ⴰⵎⵎⵓⵔ)",
+        "upload": "ⵜⵉⵍⵍⵉ ⴰⴼⵓⵙ ⴰⴷ ⵓⵙⵙⵓⵎ ⵜⵓⵙⵙⵓⵎⵜ",
+        "analyze": "ⴰⵙⵍⴻⵍ",
+        "results": "ⵜⵓⵙⵙⵓⵎⵜ: ⵜⴰⵎⵙⵙⵉⵏⵜ"
     }
-    .subtitle {
-        text-align: center;
-        color: #64748b;
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-    }
-    .highlight {
-        background-color: #ecfdf5;
-        border-left: 5px solid #10b981;
-        padding: 1rem;
-        border-radius: 10px;
-        margin: 1rem 0;
-    }
-    .pill-name {
-        font-size: 1.4rem;
-        color: #065f46;
-        font-weight: 600;
-    }
-    .answer {
-        font-size: 1rem;
-        color: #111827;
-    }
-    </style>
-""", unsafe_allow_html=True)
+}
 
-# Title
-st.markdown("<div class='title'>💊 Smart AI Medication Scanner</div>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>Upload prescriptions or medication labels to get intelligent insights</div>", unsafe_allow_html=True)
+T = LABELS.get(LANG, LABELS["en"])
+W = WARNINGS.get(LANG, WARNINGS["en"])
 
-# Load AI Model
-@st.cache_resource
-
-def load_medical_qa():
-    return pipeline("question-answering", model="dmis-lab/biobert-base-cased-v1.1-squad")
-
-qa_model = load_medical_qa()
-
-# Upload Image
-uploaded_file = st.file_uploader("📷 Upload Prescription or Medication Image", type=["png", "jpg", "jpeg"])
-
-if uploaded_file:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="🖼️ Uploaded Image", use_column_width=True)
-
-    with st.spinner("🔍 Extracting text with OCR..."):
-        extracted_text = pytesseract.image_to_string(image)
-
-    if extracted_text.strip():
-        st.markdown("### 📝 Extracted Text")
-        st.code(extracted_text)
-
-        st.markdown("### 🧠 AI Insights")
-        # Extract possible drug names or candidates from text
-        lines = [line.strip() for line in extracted_text.splitlines() if line.strip() and len(line.strip()) > 3]
-        unique_terms = list(set(lines))
-
-        for med in unique_terms:
-            if med.replace(" ", "").isalpha():  # crude filter
-                st.markdown(f"<div class='pill-name'>🔹 {med}</div>", unsafe_allow_html=True)
-                try:
-                    answer = qa_model(question=f"What is {med} used for?", context=extracted_text)
-                    st.markdown(f"<div class='highlight answer'>{answer['answer']}</div>", unsafe_allow_html=True)
-                except:
-                    st.warning(f"Couldn't find relevant data for '{med}'.")
+# Medication simulation database
+def simulate_med_info(name):
+    name = name.lower()
+    if "doliprane" in name:
+        return {
+            "name": "Doliprane (Paracetamol)",
+            "dosage": "500mg to 1g every 4-6 hours. Max 4g/day.",
+            "used_for": "Fever, mild to moderate pain, headaches.",
+            "not_for": "Liver disease, chronic alcohol use, allergic reactions.",
+            "notes": "Do not combine with other paracetamol-containing products."
+        }
     else:
-        st.warning("❌ OCR couldn't extract readable text. Try another image.")
-else:
-    st.info("👈 Upload an image to begin analysis.")
+        return None
+
+# Page layout
+st.markdown(f"## {T['title']}")
+st.warning(W)
+
+# Input
+name_input = st.text_input(f"🔤 {T['name']}")
+image_file = st.file_uploader(f"📤 {T['upload']}", type=["jpg", "jpeg", "png"])
+
+# Button
+if st.button(T["analyze"]):
+    found = None
+    if name_input:
+        found = simulate_med_info(name_input)
+    elif image_file:
+        st.image(image_file, caption="🧾 Uploaded image", use_column_width=True)
+        if "doliprane" in image_file.name.lower():
+            found = simulate_med_info("doliprane")
+
+    if found:
+        st.success(f"{T['results']}: {found['name']}")
+        st.markdown(f"**💊 Dosage**: {found['dosage']}")
+        st.markdown(f"**✅ Used For**: {found['used_for']}")
+        st.markdown(f"**🚫 Not For**: {found['not_for']}")
+        st.markdown(f"**📝 Notes**: {found['notes']}")
+    else:
+        st.error("❌ Medication not recognized. Try typing the name or using a clearer photo.")

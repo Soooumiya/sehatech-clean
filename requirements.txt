@@ -1,2 +1,5 @@
-streamlit==1.40.1
+streamlit
 pillow
+numpy
+opencv-python
+pytesseract

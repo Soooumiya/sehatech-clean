@@ -158,15 +158,15 @@ with st.expander(t["summary"], expanded=True):
 # --- Tip ---
 st.info(f"**{t['tip_title']}**\n\n{random.choice(t['tips'])}")
 
-# --- Feature Cards ---
+# --- Feature Cards (ONLY FIXED ROUTES BELOW) ---
 features = {
     "scan": ["fas fa-camera", "3_Medication_Scanner"],
-    "symptom": ["fas fa-stethoscope", "3_Symptom_Checker"],
+    "symptom": ["fas fa-stethoscope", "6_Symptom_Checker"],        # ✅ Fixed
     "telemed": ["fas fa-video", "4_Telemedicine"],
     "nearby": ["fas fa-map-marker-alt", "5_Nearby_Services"],
-    "records": ["fas fa-file-medical", None],
-    "mental": ["fas fa-brain", None],
-    "emergency": ["fas fa-ambulance", None]
+    "records": ["fas fa-file-medical", "6_Health_records"],         # ✅ Fixed
+    "mental": ["fas fa-brain", "7_Mental_Health"],                  # ✅ Fixed
+    "emergency": ["fas fa-ambulance", "8_Emergency"]                # ✅ Fixed
 }
 
 st.markdown("""
@@ -224,8 +224,6 @@ for key, (icon, page) in features.items():
     if st.button("", key=btn_key):
         if page:
             st.switch_page(f"pages/{page}.py")
-        elif key == "emergency":
-            st.warning("📞 Please call your local emergency number.")
         else:
             st.info("🚧 This feature is coming soon.")
 st.markdown('</div>', unsafe_allow_html=True)

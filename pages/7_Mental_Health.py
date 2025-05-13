@@ -4,8 +4,10 @@ import random
 import time
 import os
 
-# --- Language setup ---
-lang = st.session_state.get("lang", "en")
+# --- Language setup (defaults to Tamazight) ---
+if "lang" not in st.session_state:
+    st.session_state.lang = "tz"
+lang = st.session_state.lang
 
 # --- Translations dictionary ---
 translations = {
@@ -134,22 +136,62 @@ translations = {
         ],
         "quran_options": ["سورة الرحمن", "سورة يس", "سورة الملك"],
         "music_options": ["أصوات الغابة", "أمواج المحيط"]
+    },
+    "tz": {
+        "title": "🧠 ⴰⵏⵙⵙⵉⵍⵉ ⴰⴷ ⵉⵙⵉⵏⵉ?",
+        "moods": ["😊 ⵙⵙⴰⵎⴰⵍ", "😢 ⵓⴷⵍⵍⴰⵍ", "😡 ⴰⴷⵍⴰⵍ", "😰 ⵓⵙⴽⵔⴰⵏ", "😐 ⴰⵙⵙⴰⵎ"],
+        "mood_messages": {
+            "😊 ⵙⵙⴰⵎⴰⵍ": "ⴰⵎⵎⴰⵣⵉⵖ ! ⴰⵣⵣⵓⴽ ⵉⵎⵓⴷⴷⵓⴽ 🌞",
+            "😢 ⵓⴷⵍⵍⴰⵍ": "ⴰⵎⵎⴰⵣⵉⵖ ⴷ ⵉⵎⴰⵣⵉⵖ. ⵜⵙⵍⴽⵉ ⴷ ⴰⵣⵔⴰ. 💙",
+            "😡 ⴰⴷⵍⴰⵍ": "ⵜⴰⵍⵙⴰⵏⵜ ⴰⵙⵉⵏⵉ. ⴰⴷ ⵓⵔⵉ ⵜⵓⵙⵏⵓⵜ. 🔥",
+            "😰 ⵓⵙⴽⵔⴰⵏ": "ⴰⵎⵎⴰⵣⵉⵖ. ⵜⴰⵍⵙⴰⵏⵜ... 🌬️",
+            "😐 ⴰⵙⵙⴰⵎ": "ⴰⵣⵣⵓⴽ. ⵓⵔ ⴰⵎⴰⴷⵍⴰⵍ. 🧘"
+        },
+        "journal": "📝 ⵜⴰⵙⵙⴰⵏⵜ",
+        "write": "ⵜⵉⵏⵜⵉ ⴰⵣⵓⵍⵍⵉⵢⵏ ⵉⵙⴽⵉ:",
+        "save": "💾 ⵙⵙⵓⵏⴰⵍ",
+        "saved": "ⵙⵙⵓⵏⴰⵍ!",
+        "warning": "ⴰⵏⴰⵡ ⵜⵉⵏⵜⵉ ⵣⵉⵍⵍⵉ.",
+        "reflections": "📚 ⵜⴰⵎⴰⵣⵉⵖⵜ ⵏ ⴰⵙⴽⵉⵏ",
+        "choose_activity": "ⴰⵎⵍⵍⴰⴽ ⴰⵙⴽⵉⵏ:",
+        "breathing": "🌬️ ⴰⵙⴽⵉ ⵏ ⵜⴰⵍⵙⴰⵏⵜ",
+        "yoga": "🧘 ⵜⵙⵍⴽⵉ ⴰⵙⴽⵉ ⵏ ⵢⵓⴳⴰ",
+        "quran": "🎧 ⵜⵙⵍⴽⵉ ⴰⵙⴽⵉ ⵏ ⵇⵓⵔⴰⵏ",
+        "music": "🎵 ⵜⵙⵍⴽⵉ ⵙⵓⵏⴰⵍ ⵏ ⵓⵎⵓⵙⵉⴽ",
+        "duration": "ⴰⵙⴽⵉ ⵏ ⵜⴰⵙⴷⴰⵡⴰⵏ (ⵉⵎⵉⵏⵉ)",
+        "start": "▶️ ⵙⵉⵏⵉ",
+        "complete": "✅ ⵜⴰⵍⵙⴰⵏⵜ ⵉⴼⵔⴰⵙ!",
+        "now_playing": "ⵜⵓⵙⵙⵏⵉ",
+        "choose_surah": "ⴰⵎⵍⵍⴰⴽ ⵙⵓⵔⴰ:",
+        "choose_track": "ⴰⵎⵍⵍⴰⴽ ⵓⵙⵎⵎⴰⴷ:",
+        "seconds_remaining": "ⵉⵎⵉⵏⵉ ⵢⵓⴼⵉⵍⵉⵏ",
+        "tip": "💡 ⵜⵉⵙⵉⵏⵜ ⵏ ⵜⴰⵎⴰⵣⵉⵖⵜ",
+        "footer": "© 2025 ⴰⵎⴰⵣⵉⵖ ⵏ ⵓⵙⵙⴰⵏ ⵏ ⵉⵎⵓⵙⴰⵏ",
+        "tips": [
+            "ⵜⵉⵏⵜⵉ ⵜⴰⵙⵉⵏⵜ ⵓⵙⵏⴰⵏⵜ.",
+            "ⵜⵉⵏⵜⵉ ⴰⵎⵔ ⴷ ⵜⴰⵙⵙⴰⵏⵜ.",
+            "ⵓⵍ ⵓⴷⴷⵔ ⴰⴳⴷⵔⴰⴼ ⴰⵎⵎⴰⵣⵉⵖ.",
+            "ⴰⵙⵙⴰⵏ ⴷ ⵜⴰⵢⵓⵔ 10 ⵎⵉⵏⵉ.",
+            "ⵜⵙⵍⴽⵉ ⴷ ⴰⵣⵔⴰ ⵓⵙⴽⴰⵏ.",
+            "ⵙⵓⴳⵉ ⴰⴷ ⵜⴰⵏⴰⴷⴷⴰⵍ.",
+            "ⵜⵓⵔⵜ ⵏ ⴰⵎⵓⵙⴰⵏ ⵓⵙⴽⴰⵏ ⵓⴷⴷⴰⵔ."
+        ],
+        "quran_options": ["ⵙⵓⵔⴰ ⴰⵔⵔⴰⵎⴰⵏ", "ⵙⵓⵔⴰ ⵢⴰⵙⵉⵏ", "ⵙⵓⵔⴰ ⵎⵓⵍⴽ"],
+        "music_options": ["ⴰⵙⴽⵉ ⵏ ⵜⴰⵙⵉⵏⵜ", "ⴰⵙⴽⵉ ⵏ ⵜⴰⴳⴰⵔⵜ"]
     }
 }
 
-# --- Get current language dictionary ---
+# --- Apply translation ---
 T = translations.get(lang, translations["en"])
 def t(k): return T.get(k, k)
 
-# --- Page Configuration ---
+# --- Page content ---
 st.set_page_config(page_title=t("title"))
 st.title(t("title"))
 
-# --- Mood Selection ---
 mood = st.radio("", T["moods"], horizontal=True)
 st.success(T["mood_messages"][mood])
 
-# --- Journal Section ---
 st.subheader(t("journal"))
 entry = st.text_area(t("write"))
 
@@ -172,36 +214,28 @@ if st.session_state.journal:
         st.markdown(f"**{item['date']}**  \n{item['text']}")
         st.markdown("---")
 
-# --- Activities Section ---
 st.subheader(t("choose_activity"))
 activity = st.selectbox("", [t("breathing"), t("yoga"), t("quran"), t("music")])
 
-# Breathing Exercise
 if activity == t("breathing"):
     duration = st.slider(t("duration"), 10, 60, 30)
     if st.button(t("start")):
         bar = st.progress(0)
         counter = st.empty()
         for i in range(duration):
-            remaining = duration - i
-            counter.markdown(
-                f"<div style='text-align:center;font-size:24px;'>{remaining} {t('seconds_remaining')}</div>",
-                unsafe_allow_html=True
-            )
+            counter.markdown(f"<div style='text-align:center;font-size:24px;'>{duration - i} {t('seconds_remaining')}</div>", unsafe_allow_html=True)
             bar.progress((i + 1) / duration)
             time.sleep(1)
         bar.empty()
         counter.empty()
         st.success(t("complete"))
 
-# Yoga Video
 elif activity == t("yoga"):
     if os.path.exists("videos/Yoga.mp4"):
         st.video("videos/Yoga.mp4")
     else:
         st.warning("Yoga video not found.")
 
-# Quran Audio Playlist
 elif activity == t("quran"):
     surahs = T["quran_options"]
     files = {
@@ -216,7 +250,6 @@ elif activity == t("quran"):
     else:
         st.warning("Audio file not found.")
 
-# Relaxing Music Playlist
 elif activity == t("music"):
     tracks = T["music_options"]
     files = {
@@ -230,9 +263,7 @@ elif activity == t("music"):
     else:
         st.warning("Audio file not found.")
 
-# --- Mental Health Tip of the Day ---
 st.subheader(t("tip"))
-st.info(random.choice(T["tips"]))
+st.info(random.choice(T.get("tips", [])))
 
-# --- Footer ---
 st.markdown(f"<div style='text-align:center;color:gray;margin-top:2rem'>{t('footer')}</div>", unsafe_allow_html=True)

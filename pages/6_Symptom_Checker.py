@@ -1,66 +1,96 @@
 import streamlit as st
+import json
+import os
 
-st.set_page_config(page_title="Symptom Checker", layout="wide")
+# 🌍 Get language from session or fallback to English
+# Get language from session and normalize it
+lang = st.session_state.get("lang", "en")
 
-# --- Page Header ---
-st.markdown("<h2 style='color:#0f766e;'>🔍 Symptom Checker</h2>", unsafe_allow_html=True)
-st.markdown("<p style='color:#64748b;'>Describe your symptoms to get possible conditions and advice.</p>", unsafe_allow_html=True)
+# Normalize alternative codes (e.g., from main page)
+lang_aliases = {
+    "amz": "tz",        # ISO code for Tamazight
+    "amazigh": "tz",
+    "tamazight": "tz"
+}
+lang = lang_aliases.get(lang, lang)
 
-# --- Input Section ---
-symptoms = st.text_area("📝 Describe your symptoms", placeholder="e.g., headache, fever, sore throat...")
-duration = st.text_input("📆 Duration of symptoms", placeholder="e.g., 2 days, 1 week...")
-severity = st.slider("📊 Severity (1: mild – 10: severe)", 1, 10, 5)
 
-# --- Check Symptoms Button ---
-if st.button("Check Symptoms"):
-    if symptoms.strip() == "":
-        st.warning("Please enter some symptoms.")
-    else:
-        with st.spinner("Analyzing your symptoms..."):
-            # Simulated diagnosis logic
-            conditions = [
-                {
-                    "name": "Common Cold",
-                    "probability": "80%",
-                    "urgency": "Low",
-                    "description": "A viral infection with symptoms like sore throat, runny nose, and cough.",
-                    "recommendations": ["Rest", "Hydration", "Over-the-counter meds"]
-                },
-                {
-                    "name": "Flu",
-                    "probability": "60%",
-                    "urgency": "Moderate",
-                    "description": "A respiratory illness with fever, chills, and body aches.",
-                    "recommendations": ["See a doctor if symptoms persist", "Rest"]
-                },
-                {
-                    "name": "COVID-19",
-                    "probability": "30%",
-                    "urgency": "High",
-                    "description": "Can present symptoms like fever, cough, and loss of smell.",
-                    "recommendations": ["Get tested", "Self-isolate", "Seek medical help if severe"]
-                }
-            ]
+# Translations for UI strings
+T = {
+    "en": {
+        "title": "🩺 Symptom Checker",
+        "desc": "Select a **category**, then a symptom to get reliable info and advice.\n\n⚠️ This is not a medical diagnosis tool.",
+        "choose_cat": "🏥 Choose a category",
+        "choose_symptom": "🔍 Choose a symptom",
+        "category": "Category",
+        "description": "📖 Description",
+        "advice": "🩹 Advice",
+        "footer": "© 2025 SehaTech | Educational purpose only."
+    },
+    "fr": {
+        "title": "🩺 Vérificateur de Symptômes",
+        "desc": "Sélectionnez une **catégorie**, puis un symptôme pour des informations fiables.\n\n⚠️ Cet outil n'est pas un diagnostic médical.",
+        "choose_cat": "🏥 Choisissez une catégorie",
+        "choose_symptom": "🔍 Choisissez un symptôme",
+        "category": "Catégorie",
+        "description": "📖 Description",
+        "advice": "🩹 Conseil",
+        "footer": "© 2025 SehaTech | À but éducatif uniquement."
+    },
+    "ar": {
+        "title": "🩺 فحص الأعراض",
+        "desc": "اختر **فئة** ثم عرض للحصول على معلومات موثوقة.\n\n⚠️ هذا ليس تشخيصًا طبيًا.",
+        "choose_cat": "🏥 اختر الفئة",
+        "choose_symptom": "🔍 اختر العرض",
+        "category": "الفئة",
+        "description": "📖 الوصف",
+        "advice": "🩹 النصيحة",
+        "footer": "© 2025 SehaTech | للاستخدام التعليمي فقط."
+    },
+    "tz": {
+        "title": "🩺 ⴼⵙⵙ ⵏ ⵉⵙⵙⵓⵎⴰⵏ",
+        "desc": "ⴰⴷⵔ ⵜⴰⴳⵔⴰ ⴰⵏ ⵜⵉⵙⵙⵓⵎⴰⵏ ⵏ ⵏⴻⵎⴰⵍⵉⴷ ⵓⴷ ⵉⵙⵏⴰⵡⵉⵏ.\n\n⚠️ ⴰⵎⵙⵙⵓⵎ ⵙⴰ ⵓⵎⴰⴷⴰⵔ ⵏ ⵜⵉⵏⵏⴰⵡⵉⵏ.",
+        "choose_cat": "🏥 ⴰⴷⵔ ⵜⴰⴳⵔⴰ",
+        "choose_symptom": "🔍 ⴰⴷⵔ ⵜⵉⵙⵙⵓⵎⴰⵏ",
+        "category": "ⵜⴰⴳⵔⴰ",
+        "description": "📖 ⴰⵎⵙⵙⵉⵏ",
+        "advice": "🩹 ⵓⵙⵙⵓⵎ",
+        "footer": "© 2025 SehaTech | ⵉⵙⵙ ⵏ ⵜⵙⵙⴰⵏⵜ ⵜⴰⵎⵙⴰⵏⵜ."
+    }
+}[lang]
 
-        st.markdown("<h4 style='color:#0f766e; margin-top: 2rem;'>🩺 Possible Conditions</h4>", unsafe_allow_html=True)
-        
-        for condition in conditions:
-            urgency_color = {
-                "High": "#ef4444",
-                "Moderate": "#f59e0b",
-                "Low": "#10b981"
-            }.get(condition["urgency"], "#6b7280")
+# Load JSON file
+file_path = f"data/symptoms_{lang}_30.json"
+if not os.path.exists(file_path):
+    st.error(f"Translation file missing: {file_path}")
+    st.stop()
 
-            st.markdown(f"""
-                <div style="background-color:#f9fafb; padding:1rem; border-left: 5px solid {urgency_color}; border-radius: 8px; margin-bottom: 1rem;">
-                    <strong style="font-size:1.2rem; color:#0f766e;">{condition['name']}</strong>
-                    <p style="margin:0.3rem 0; color:#64748b;">{condition['description']}</p>
-                    <p><strong>Probability:</strong> {condition['probability']}<br>
-                    <strong>Urgency:</strong> <span style="color:{urgency_color};">{condition['urgency']}</span></p>
-                    <ul>
-                        {''.join(f'<li>{rec}</li>' for rec in condition['recommendations'])}
-                    </ul>
-                </div>
-            """, unsafe_allow_html=True)
+with open(file_path, "r", encoding="utf-8") as f:
+    symptoms_data = json.load(f)
 
-        st.info("⚠️ This is not a medical diagnosis. Always consult a healthcare provider for proper medical advice.")
+# Setup page
+st.set_page_config(page_title=T["title"], layout="centered")
+st.markdown(f"<h1 style='text-align:center; color:green'>{T['title']}</h1>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align:center'>{T['desc']}</p>", unsafe_allow_html=True)
+
+# Get categories
+categories = sorted(set(s["category"] for s in symptoms_data))
+selected_category = st.selectbox(T["choose_cat"], categories)
+
+# Get symptoms by category
+filtered = [s for s in symptoms_data if s["category"] == selected_category]
+symptoms = sorted([s["name"] for s in filtered])
+selected_symptom = st.selectbox(T["choose_symptom"], symptoms)
+
+# Show info
+symptom = next((s for s in filtered if s["name"] == selected_symptom), None)
+if symptom:
+    st.markdown(f"### 🩺 {symptom['name']}")
+    st.markdown(f"**{T['category']}:** {symptom['category']}")
+    st.markdown(f"**{T['description']}**")
+    st.info(symptom["description"])
+    st.markdown(f"**{T['advice']}**")
+    st.success(symptom["advice"])
+
+st.markdown("---")
+st.markdown(f"<p style='text-align:center'>{T['footer']}</p>", unsafe_allow_html=True)

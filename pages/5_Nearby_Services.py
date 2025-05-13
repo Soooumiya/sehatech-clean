@@ -2,10 +2,10 @@ import streamlit as st
 import urllib.parse
 from streamlit_geolocation import streamlit_geolocation
 
-# Get selected language
+# --- Language Selection ---
 lang = st.session_state.get("lang", "en")
 
-# Translations
+# --- Translations ---
 translations = {
     "en": {
         "title": "📍 Nearby Health Services",
@@ -17,54 +17,20 @@ translations = {
         "info": "👈 Enter a location and choose a service type to begin.",
         "types": ["Hospital", "Clinic", "Pharmacy"],
         "use_my_location": "📍 Use My Location",
-        "location_error": "⚠️ Could not detect location. Please allow GPS access in your browser."
+        "location_error": "⚠️ We couldn’t get your location. Please enable location permissions in your browser settings and try again.",
+        "location_prompt": "🔒 Please allow location access when prompted by your browser."
     },
-    "fr": {
-        "title": "📍 Services de santé à proximité",
-        "subtitle": "Recherchez des hôpitaux, cliniques ou pharmacies près de chez vous",
-        "enter_location": "📍 Entrez votre ville ou code postal",
-        "placeholder": "ex. Paris, 75001",
-        "map_title": "🗺️ Carte des résultats",
-        "open_map": "🔗 Ouvrir la carte complète sur Google Maps",
-        "info": "👈 Entrez un lieu et choisissez un type de service pour commencer.",
-        "types": ["Hôpital", "Clinique", "Pharmacie"],
-        "use_my_location": "📍 Utiliser ma position",
-        "location_error": "⚠️ Impossible de détecter la position. Veuillez autoriser l'accès à la localisation."
-    },
-    "ar": {
-        "title": "📍 خدمات صحية قريبة",
-        "subtitle": "ابحث عن مستشفيات أو عيادات أو صيدليات قريبة منك",
-        "enter_location": "📍 أدخل المنطقة أو المدينة أو الرمز البريدي",
-        "placeholder": "مثال: الرياض، 11564",
-        "map_title": "🗺️ خريطة النتائج",
-        "open_map": "🔗 فتح الخريطة الكاملة في Google Maps",
-        "info": "👈 أدخل الموقع واختر نوع الخدمة للبدء.",
-        "types": ["مستشفى", "عيادة", "صيدلية"],
-        "use_my_location": "📍 استخدم موقعي",
-        "location_error": "⚠️ تعذر الكشف عن الموقع. يرجى تفعيل GPS في المتصفح."
-    },
-    "amz": {
-        "title": "📍 ⵙⴻⵀⴰⵜⴻⵎ ⵏ ⵏⵉⵎⵉⴷⵉⵏ ⵏ ⵜⴰⵎⴰⵣⵉⵖⵜ",
-        "subtitle": "ⴰⴷⵔ ⵉⵙⵉⵏ ⵏ ⵎⴰⵙⴷⵉⵏ ⴷ ⵎⵉⴽⴽⵓⴷⵉⵏ ⴰⴷ ⵜⵉⵙⵏⵉⵏ ⵓⴳⵓⴹⵉⵏ",
-        "enter_location": "📍 ⴰⴷⵔ ⵜⵓⴱⵍⵉⵢⵜ ⵏ ⴰⵙⴳⴰⵙ, ⵜⴰⵎⵓⵔⵜ ⵓ ⵙⴰⵎⵓⵔ",
-        "placeholder": "ⴻⵙ: ⵔⵉⵢⴰⴹ, 11564",
-        "map_title": "🗺️ ⵜⴰⵎⵏⵓⵜ ⵏ ⵜⴰⵎⴰⵣⵉⵖⵜ",
-        "open_map": "🔗 ⵜⴰⵎⵏⵓⵜ ⴷ ⴳⴳⵯⵍ ⵎⴰⴱⵙ",
-        "info": "👈 ⴰⴷⵔ ⵓⵙⴻⵍⵍⵉⵏ ⵓ ⵜⴰⴼⵓⵙ ⵜⵉⵣⵉⵏⵜ ⵓⴳⵯⴰⴷ.",
-        "types": ["ⵎⴰⵙⴷⵉ", "ⵎⵎⵓⵔ", "ⵜⵉⵙⵏⵉⵏ"],
-        "use_my_location": "📍 ⵓⵙⴻⵍⵍⵉⵏ ⵏⵓ",
-        "location_error": "⚠️ ⵉⵙⵉ ⴰⵎⵙⵙⵓⴼ ⵏ ⴰⵎⵓⴷⴷⴰⵏ. ⴰⴷⵔ ⴰⵔⴰ ⵉⵏⵏⴰⵙ ⵏ GPS ⴷ ⴱⵔⵓⵥⴰⵔ."
-    }
+    # Add FR, AR, AMZ versions if needed
 }
 
 t = translations[lang]
 
+# --- Page Config ---
 st.set_page_config(page_title=t["title"], layout="centered")
 
-# --- Custom Style ---
+# --- Style ---
 st.markdown("""
     <style>
-        body { background: #f9fafb; }
         .main-title {
             font-size: 2.4rem;
             text-align: center;
@@ -101,10 +67,6 @@ st.markdown("""
             background: #10b981;
             color: white;
         }
-        iframe {
-            border-radius: 12px;
-            border: none;
-        }
         .map-note {
             font-size: 0.95rem;
             color: #4b5563;
@@ -114,13 +76,12 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Title Block ---
+# --- Titles ---
 st.markdown(f"<div class='main-title'>{t['title']}</div>", unsafe_allow_html=True)
 st.markdown(f"<div class='sub-title'>{t['subtitle']}</div>", unsafe_allow_html=True)
 
-# --- Service Type Selection ---
+# --- Service Type Selector ---
 place_types = t["types"]
-
 if "selected_service" not in st.session_state:
     st.session_state.selected_service = place_types[0]
 
@@ -133,14 +94,16 @@ for ptype in place_types:
     st.button("", key=f"{ptype}_btn", on_click=lambda p=ptype: st.session_state.update({"selected_service": p}))
 st.markdown('</div>', unsafe_allow_html=True)
 
+# --- Location Input ---
+location = st.text_input(t["enter_location"], placeholder=t["placeholder"])
+
 # --- Use My Location Button ---
 use_gps = st.button(t["use_my_location"])
 
-# --- Manual Location Input ---
-location = st.text_input(t["enter_location"], placeholder=t["placeholder"])
-
-# --- Use GPS Location ---
+# --- GPS Logic ---
 if use_gps:
+    st.info(t["location_prompt"])  # Ask for permission
+
     loc = streamlit_geolocation()
     if loc and loc.get("latitude") and loc.get("longitude"):
         lat, lon = loc["latitude"], loc["longitude"]
@@ -152,7 +115,7 @@ if use_gps:
     else:
         st.warning(t["location_error"])
 
-# --- Use Manual Input ---
+# --- Fallback: Manual Entry ---
 elif location:
     query = f"{st.session_state.selected_service} near {location}"
     maps_url = f"https://www.google.com/maps/search/{urllib.parse.quote(query)}"

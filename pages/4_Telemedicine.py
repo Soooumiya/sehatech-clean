@@ -1,19 +1,32 @@
 import streamlit as st
 import json
 
-# Page setup
+# --- Page setup ---
 st.set_page_config(page_title="SehaTech - Doctors", layout="wide")
 
-# Load doctor data
+# --- Multilingual notice ---
+lang = st.session_state.get("lang", "en")
+
+notices = {
+    "en": "❗ This page cannot be translated due to the nature of doctor names, contact methods, and clinical data.",
+    "fr": "❗ Cette page ne peut pas être traduite en raison des noms des médecins et des données médicales.",
+    "ar": "❗ لا يمكن ترجمة هذه الصفحة بسبب أسماء الأطباء والبيانات الطبية.",
+    "amz": "❗ ⵜⴰⵙⴳⴰ ⴼⵓⵍⴰ ⵜⴰⵏⵙⵉⴷⵜ ⵉⵙ ⵓⴽⴰⵢ ⴰⴷⵔⴰⴼ ⴰⵏⵙⵙ ⴰⵎⴰⵣⵉⵖ ⵏ ⴰⵎⵎⵓⵔⵏ ⴷ ⵉⵙⴻⴼⴽⴰⵏ ⵏ ⵜⵉⴷⵍⵍⵉⵜ.",
+}
+
+
+st.warning(notices.get(lang, notices["en"]))
+
+# --- Load doctor data ---
 with open("doctors_500.json", "r") as f:
     doctors = json.load(f)
 
-# Extract filters
+# --- Extract filters ---
 specialties = sorted(set(doc['specialty'] for doc in doctors))
 languages = sorted(set(lang for doc in doctors for lang in doc['languages']))
 contacts = ["Video Call", "WhatsApp", "Email", "Message"]
 
-# CSS styles
+# --- CSS styles ---
 st.markdown("""
     <style>
         .header {
@@ -75,11 +88,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Header
+# --- Header ---
 st.markdown("<div class='header'>🩺 SehaTech - Find Your Doctor</div>", unsafe_allow_html=True)
 st.markdown("<div class='subheader'>Filter doctors by specialty, language, and contact method. 500+ doctors available.</div>", unsafe_allow_html=True)
 
-# Filters
+# --- Filters ---
 col1, col2, col3 = st.columns(3)
 with col1:
     selected_spec = st.selectbox("🩺 Specialty", specialties)
@@ -88,7 +101,7 @@ with col2:
 with col3:
     selected_contact = st.selectbox("📞 Contact Method", contacts)
 
-# Filter logic
+# --- Filter logic ---
 def match(doc):
     return (
         doc["specialty"] == selected_spec and
@@ -98,7 +111,7 @@ def match(doc):
 
 filtered = [doc for doc in doctors if match(doc)]
 
-# Pagination
+# --- Pagination ---
 page_size = 12
 total = len(filtered)
 page = st.number_input("Page", 1, max(1, total // page_size + (1 if total % page_size else 0)), 1)
@@ -108,7 +121,7 @@ paged_docs = filtered[start_idx:end_idx]
 
 st.markdown(f"### ✅ Showing {len(paged_docs)} of {total} matching doctors")
 
-# Display cards
+# --- Display cards ---
 cols = st.columns(3)
 
 for idx, doc in enumerate(paged_docs):
@@ -124,12 +137,11 @@ for idx, doc in enumerate(paged_docs):
             <div style="margin-top: 0.6rem;">
         """, unsafe_allow_html=True)
 
-        # Buttons with emojis and colors
         buttons = []
         if "Video Call" in doc["contacts"]:
             buttons.append(f"<a class='btn video' href='https://meet.jit.si/{doc['name'].replace(' ', '')}' target='_blank'>🎥 Video</a>")
         if "WhatsApp" in doc["contacts"]:
-            buttons.append(f"<a class='btn whatsapp' href='https://wa.me/{doc['phone'].replace('+', '')}' target='_blank'>🟢💬 WhatsApp</a>")
+            buttons.append(f"<a class='btn whatsapp' href='https://wa.me/{doc['phone'].replace('+', '')}' target='_blank'>💬 WhatsApp</a>")
         if "Email" in doc["contacts"]:
             buttons.append(f"<a class='btn email' href='mailto:{doc['email']}' target='_blank'>✉️ Email</a>")
         if "Message" in doc["contacts"]:
