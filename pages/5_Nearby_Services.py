@@ -20,10 +20,48 @@ translations = {
         "location_error": "⚠️ We couldn’t get your location. Please enable location permissions in your browser settings and try again.",
         "location_prompt": "🔒 Please allow location access when prompted by your browser."
     },
-    # Add FR, AR, AMZ versions if needed
+    "fr": {
+        "title": "📍 Services de santé à proximité",
+        "subtitle": "Recherchez des hôpitaux, cliniques ou pharmacies près de chez vous",
+        "enter_location": "📍 Entrez votre zone, ville ou code postal",
+        "placeholder": "ex: Paris, 75001",
+        "map_title": "🗺️ Carte des résultats",
+        "open_map": "🔗 Ouvrir la carte complète sur Google Maps",
+        "info": "👈 Entrez un lieu et choisissez un type de service pour commencer.",
+        "types": ["Hôpital", "Clinique", "Pharmacie"],
+        "use_my_location": "📍 Utiliser ma position",
+        "location_error": "⚠️ Impossible d’obtenir votre position. Veuillez activer les permissions de localisation dans votre navigateur.",
+        "location_prompt": "🔒 Veuillez autoriser l'accès à la localisation lorsque votre navigateur le demande."
+    },
+    "ar": {
+        "title": "📍 خدمات صحية قريبة",
+        "subtitle": "ابحث عن مستشفيات أو عيادات أو صيدليات بالقرب منك",
+        "enter_location": "📍 أدخل منطقتك أو مدينتك أو الرمز البريدي",
+        "placeholder": "مثال: الرياض، 11564",
+        "map_title": "🗺️ خريطة النتائج",
+        "open_map": "🔗 افتح الخريطة الكاملة في خرائط Google",
+        "info": "👈 أدخل الموقع واختر نوع الخدمة للبدء.",
+        "types": ["مستشفى", "عيادة", "صيدلية"],
+        "use_my_location": "📍 استخدم موقعي",
+        "location_error": "⚠️ لم نتمكن من الحصول على موقعك. يرجى تفعيل إذن الوصول إلى الموقع من إعدادات المتصفح.",
+        "location_prompt": "🔒 الرجاء السماح بالوصول إلى الموقع عند مطالبة المتصفح بذلك."
+    },
+    "amz": {
+        "title": "📍 ⵓⵙⴻⵍⵍⵉ ⵏ ⵜⵉⵏⵏⵓⵙⵏ ⵏ ⵓⵙⴰⵏ",
+        "subtitle": "ⵙⵙⵓⵔⵜ ⵓⵙⴰⵏ ⴷ ⵜⵉⵏⵏⵓⵙⵏ ⵓⵎⴻⵏⵏⵓ ⵓⵙⴰⵏ ⵜⴰⵏⴳⴷⴰⵔⵜ",
+        "enter_location": "📍 ⴰⵙⵉⵏ ⵓⵙⴰⵏ ⵓⵎⴰⵙⵙⵉⵏ ⴰⵎⴰ ⵜⴰⵙⴳⴰ ⴷ ⵓⴳⴰⵔ",
+        "placeholder": "ⴼⴰⵙⴼⴰⵍ: ⵔⵉⵢⴰⴹ، 11564",
+        "map_title": "🗺️ ⵜⵉⵏⵏⵓⵙⵏ ⴷ ⴰⵣⵓⵍⵉ",
+        "open_map": "🔗 ⴰⵔ ⴰⵣⵓⵍ ⴰⴼⴻⵏ ⵓⴳⴰⴷ ⵓⵙⴰⵏ ⵓⵏⵖ ⵓⴳⵓⴳⵓⵍ",
+        "info": "👈 ⴰⵙⵉⵏ ⵓⵙⴰⵏ ⴷ ⴰⴼⵓⵙ ⵜⵉⵏⵏⵓⵙⵜ ⵉⴷⵔⴰⵏ ⴰⵎⴰ ⵉⵙⵍⵍ.",
+        "types": ["ⴰⵙⵉⵏⵓⵙ", "ⴰⵔⵓⵎⴰⵏ", "ⴰⵎⴰⵢⴻⵍ"],
+        "use_my_location": "📍 ⵓⵙⵍⵍ ⵓⵎⴰⵏ ⵙⴻⵏⴰⵡ",
+        "location_error": "⚠️ ⵉⵎⴻⵏⵏⵓ ⵓⴼⴰⵙ ⵉⵙⴰⵏ ⵓⵎⴰⵏⴻⵏ.",
+        "location_prompt": "🔒 ⴰⴼⵓⵙ ⵜⵉⵏⵏⵓⵙⵜ ⵉⵏ ⴰⵙⴰⵏ ⵏ ⵓⵎⴰⵏ ⵙⴻⵏⴰⵡ."
+    }
 }
 
-t = translations[lang]
+t = translations.get(lang, translations["en"])
 
 # --- Page Config ---
 st.set_page_config(page_title=t["title"], layout="centered")
@@ -115,12 +153,12 @@ if use_gps:
     else:
         st.warning(t["location_error"])
 
-# --- Fallback: Manual Entry ---
 elif location:
     query = f"{st.session_state.selected_service} near {location}"
     maps_url = f"https://www.google.com/maps/search/{urllib.parse.quote(query)}"
     st.markdown(f"### {t['map_title']}")
     st.components.v1.iframe(maps_url, height=500)
     st.markdown(f"<div class='map-note'><a href='{maps_url}' target='_blank'>{t['open_map']}</a></div>", unsafe_allow_html=True)
+
 else:
     st.info(t["info"])

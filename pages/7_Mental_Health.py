@@ -4,9 +4,9 @@ import random
 import time
 import os
 
-# --- Language setup (defaults to Tamazight) ---
+# --- Language setup ---
 if "lang" not in st.session_state:
-    st.session_state.lang = "tz"
+    st.session_state.lang = "amz"
 lang = st.session_state.lang
 
 # --- Translations dictionary ---
@@ -137,7 +137,7 @@ translations = {
         "quran_options": ["سورة الرحمن", "سورة يس", "سورة الملك"],
         "music_options": ["أصوات الغابة", "أمواج المحيط"]
     },
-    "tz": {
+    "amz": {
         "title": "🧠 ⴰⵏⵙⵙⵉⵍⵉ ⴰⴷ ⵉⵙⵉⵏⵉ?",
         "moods": ["😊 ⵙⵙⴰⵎⴰⵍ", "😢 ⵓⴷⵍⵍⴰⵍ", "😡 ⴰⴷⵍⴰⵍ", "😰 ⵓⵙⴽⵔⴰⵏ", "😐 ⴰⵙⵙⴰⵎ"],
         "mood_messages": {

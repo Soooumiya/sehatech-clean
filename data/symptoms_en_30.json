@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Chest pain",
+    "category": "Cardiovascular",
+    "description": "Chest pain can signal a heart attack, angina, or other urgent medical issues and should never be ignored.",
+    "advice": "Seek emergency care if chest pain is severe, sudden, or accompanied by shortness of breath, nausea, or sweating."
+  },
+  {
+    "name": "Palpitations",
+    "category": "Cardiovascular",
+    "description": "Palpitations are sensations of a racing or irregular heartbeat, which can be caused by anxiety, caffeine, or heart arrhythmias.",
+    "advice": "Limit caffeine and stress; consult a cardiologist if palpitations occur frequently or cause discomfort."
+  },
+  {
+    "name": "High blood pressure",
+    "category": "Cardiovascular",
+    "description": "High blood pressure increases the risk of heart disease and stroke, often without noticeable symptoms.",
+    "advice": "Regularly monitor your blood pressure and follow a low-sodium diet; consult your physician for ongoing management."
+  },
+  {
+    "name": "Low blood pressure",
+    "category": "Cardiovascular",
+    "description": "Low blood pressure can cause dizziness and fainting and may result from dehydration, medications, or heart conditions.",
+    "advice": "Increase fluid intake and rise slowly from sitting or lying positions; see a doctor if symptoms persist."
+  },
+  {
+    "name": "Swelling in legs",
+    "category": "Cardiovascular",
+    "description": "Swelling in the legs might indicate fluid retention, poor circulation, or heart, kidney, or liver problems.",
+    "advice": "Elevate your legs, reduce salt intake, and seek medical evaluation if swelling is persistent or painful."
+  },
+  {
+    "name": "Shortness of breath",
+    "category": "Respiratory",
+    "description": "Shortness of breath can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about shortness of breath."
+  },
+  {
+    "name": "Wheezing",
+    "category": "Respiratory",
+    "description": "Wheezing can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about wheezing."
+  },
+  {
+    "name": "Cough",
+    "category": "Respiratory",
+    "description": "Cough can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about cough."
+  },
+  {
+    "name": "Coughing blood",
+    "category": "Respiratory",
+    "description": "Coughing blood can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about coughing blood."
+  },
+  {
+    "name": "Chest tightness",
+    "category": "Respiratory",
+    "description": "Chest tightness can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about chest tightness."
+  },
+  {
+    "name": "Headache",
+    "category": "Neurological",
+    "description": "Headache can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about headache."
+  },
+  {
+    "name": "Seizures",
+    "category": "Neurological",
+    "description": "Seizures can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about seizures."
+  },
+  {
+    "name": "Dizziness",
+    "category": "Neurological",
+    "description": "Dizziness can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about dizziness."
+  },
+  {
+    "name": "Numbness",
+    "category": "Neurological",
+    "description": "Numbness can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about numbness."
+  },
+  {
+    "name": "Confusion",
+    "category": "Neurological",
+    "description": "Confusion can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about confusion."
+  },
+  {
+    "name": "Nausea",
+    "category": "Gastrointestinal",
+    "description": "Nausea can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about nausea."
+  },
+  {
+    "name": "Vomiting",
+    "category": "Gastrointestinal",
+    "description": "Vomiting can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about vomiting."
+  },
+  {
+    "name": "Diarrhea",
+    "category": "Gastrointestinal",
+    "description": "Diarrhea can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about diarrhea."
+  },
+  {
+    "name": "Constipation",
+    "category": "Gastrointestinal",
+    "description": "Constipation can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about constipation."
+  },
+  {
+    "name": "Abdominal pain",
+    "category": "Gastrointestinal",
+    "description": "Abdominal pain can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about abdominal pain."
+  },
+  {
+    "name": "Skin rash",
+    "category": "Dermatological",
+    "description": "Skin rash can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about skin rash."
+  },
+  {
+    "name": "Itching",
+    "category": "Dermatological",
+    "description": "Itching can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about itching."
+  },
+  {
+    "name": "Dry skin",
+    "category": "Dermatological",
+    "description": "Dry skin can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about dry skin."
+  },
+  {
+    "name": "Blisters",
+    "category": "Dermatological",
+    "description": "Blisters can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about blisters."
+  },
+  {
+    "name": "Redness",
+    "category": "Dermatological",
+    "description": "Redness can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about redness."
+  },
+  {
+    "name": "Joint pain",
+    "category": "Musculoskeletal",
+    "description": "Joint pain can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about joint pain."
+  },
+  {
+    "name": "Back pain",
+    "category": "Musculoskeletal",
+    "description": "Back pain can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about back pain."
+  },
+  {
+    "name": "Neck pain",
+    "category": "Musculoskeletal",
+    "description": "Neck pain can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about neck pain."
+  },
+  {
+    "name": "Muscle cramps",
+    "category": "Musculoskeletal",
+    "description": "Muscle cramps can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about muscle cramps."
+  },
+  {
+    "name": "Limited mobility",
+    "category": "Musculoskeletal",
+    "description": "Limited mobility can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about limited mobility."
+  },
+  {
+    "name": "Fatigue",
+    "category": "Endocrine",
+    "description": "Fatigue can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about fatigue."
+  },
+  {
+    "name": "Weight gain",
+    "category": "Endocrine",
+    "description": "Weight gain can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about weight gain."
+  },
+  {
+    "name": "Weight loss",
+    "category": "Endocrine",
+    "description": "Weight loss can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about weight loss."
+  },
+  {
+    "name": "Hair loss",
+    "category": "Endocrine",
+    "description": "Hair loss can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about hair loss."
+  },
+  {
+    "name": "Cold intolerance",
+    "category": "Endocrine",
+    "description": "Cold intolerance can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about cold intolerance."
+  },
+  {
+    "name": "Frequent urination",
+    "category": "Urological",
+    "description": "Frequent urination can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about frequent urination."
+  },
+  {
+    "name": "Painful urination",
+    "category": "Urological",
+    "description": "Painful urination can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about painful urination."
+  },
+  {
+    "name": "Blood in urine",
+    "category": "Urological",
+    "description": "Blood in urine can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about blood in urine."
+  },
+  {
+    "name": "Urgency to urinate",
+    "category": "Urological",
+    "description": "Urgency to urinate can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about urgency to urinate."
+  },
+  {
+    "name": "Incontinence",
+    "category": "Urological",
+    "description": "Incontinence can have various causes depending on the medical context.",
+    "advice": "Consult a healthcare professional for an accurate diagnosis and personalized advice about incontinence."
+  }
+]

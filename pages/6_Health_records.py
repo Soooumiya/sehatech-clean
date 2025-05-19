@@ -4,12 +4,11 @@ from dateutil.relativedelta import relativedelta
 
 # --- Page Setup ---
 st.set_page_config(page_title="📁 Health Records & Preventive Calendar", layout="wide")
-st.title("📁 Personal Health Records")
-st.caption("Track your health checks and see when to follow up next.")
 
 # --- Language Setup ---
 lang = st.session_state.get("lang", "en")
 
+# --- Translations ---
 translations = {
     "en": {
         "upload_title": "📤 Upload Medical Files",
@@ -34,13 +33,40 @@ translations = {
         "status": "Status",
         "done": "Done",
         "not_done": "Not Done",
-        "why_is_important": "💡 Why is this important?"
+        "why_is_important": "💡 Why is this important?",
+        "view_uploaded": "📁 View Uploaded Files",
+        "when_done": "✅ When?",
+        "recommended": "Recommended:",
+        "schedule_soon": "soon.",
+        "date_format": "%Y-%m-%d",
+        "check_names": {
+            "Blood Pressure": "Blood Pressure",
+            "Cholesterol": "Cholesterol",
+            "Diabetes": "Diabetes",
+            "Dental": "Dental",
+            "Eye Exam": "Eye Exam",
+            "Skin Check": "Skin Check",
+            "Mental Health": "Mental Health",
+            "Hearing Test": "Hearing Test",
+            "Colonoscopy": "Colonoscopy",
+            "Thyroid": "Thyroid",
+            "Hepatitis": "Hepatitis",
+            "Flu Vaccine": "Flu Vaccine",
+            "BMI": "BMI",
+            "Kidney": "Kidney",
+            "Vitamin D": "Vitamin D",
+            "Sleep Health": "Sleep Health",
+            "Bone Density": "Bone Density",
+            "Breast Exam": "Breast Exam",
+            "Cervical Pap": "Cervical Pap",
+            "Prostate Exam": "Prostate Exam"
+        }
     },
     "fr": {
-        "upload_title": "📤 Télécharger les dossiers médicaux",
-        "upload_instruction": "Téléchargez vos documents médicaux ici. Limite de 200 Mo par fichier • PDF, JPG, JPEG, PNG.",
+        "upload_title": "📤 Télécharger les fichiers médicaux",
+        "upload_instruction": "Glissez-déposez vos documents médicaux ici. Limite de 200 Mo par fichier • PDF, JPG, JPEG, PNG.",
         "consult_title": "🩺 Enregistrer les visites médicales",
-        "consult_instruction": "Suivez vos visites chez le médecin et le diagnostic.",
+        "consult_instruction": "Suivez vos consultations médicales et diagnostics.",
         "save_button": "Enregistrer la consultation",
         "error_fill": "❌ Veuillez remplir tous les champs avant d'enregistrer.",
         "saved": "✅ Consultation enregistrée.",
@@ -48,8 +74,8 @@ translations = {
         "health_checks": "🧭 Vos bilans de santé personnalisés",
         "next_check": "Prochain contrôle recommandé le : ",
         "no_followup": "Aucun suivi régulier requis.",
-        "should_schedule": "📌 Vous devez planifier un examen",
-        "summary_title": "📆 Calendrier récapitulatif : Vos prochains bilans",
+        "should_schedule": "📌 Vous devriez planifier un",
+        "summary_title": "📆 Calendrier : Vos prochains bilans",
         "file_uploaded": "✅ Fichier téléchargé.",
         "visit_date": "Date de la visite",
         "doctor_name": "Nom du médecin",
@@ -57,24 +83,51 @@ translations = {
         "clinic": "Clinique / Hôpital",
         "notes": "Notes du médecin / Diagnostic",
         "status": "Statut",
-        "done": "Fait",
-        "not_done": "Non fait",
-        "why_is_important": "💡 Pourquoi est-ce important?"
+        "done": "Effectué",
+        "not_done": "Non effectué",
+        "why_is_important": "💡 Pourquoi est-ce important ?",
+        "view_uploaded": "📁 Voir les fichiers téléchargés",
+        "when_done": "✅ Quand ?",
+        "recommended": "Recommandé :",
+        "schedule_soon": "bientôt.",
+        "date_format": "%d %B %Y",
+        "check_names": {
+            "Blood Pressure": "Pression artérielle",
+            "Cholesterol": "Cholestérol",
+            "Diabetes": "Diabète",
+            "Dental": "Dentaire",
+            "Eye Exam": "Examen des yeux",
+            "Skin Check": "Examen de la peau",
+            "Mental Health": "Santé mentale",
+            "Hearing Test": "Test auditif",
+            "Colonoscopy": "Coloscopie",
+            "Thyroid": "Thyroïde",
+            "Hepatitis": "Hépatite",
+            "Flu Vaccine": "Vaccin contre la grippe",
+            "BMI": "IMC",
+            "Kidney": "Reins",
+            "Vitamin D": "Vitamine D",
+            "Sleep Health": "Sommeil",
+            "Bone Density": "Densité osseuse",
+            "Breast Exam": "Examen des seins",
+            "Cervical Pap": "Test de Pap",
+            "Prostate Exam": "Examen de la prostate"
+        }
     },
     "ar": {
         "upload_title": "📤 تحميل الملفات الطبية",
-        "upload_instruction": "قم بسحب وإفلات مستنداتك الطبية هنا. الحد الأقصى 200 ميجابايت لكل ملف • PDF، JPG، JPEG، PNG.",
+        "upload_instruction": "اسحب وأفلت مستنداتك الطبية هنا. الحد الأقصى 200 ميجابايت لكل ملف • PDF، JPG، JPEG، PNG.",
         "consult_title": "🩺 تسجيل زيارات الطبيب",
-        "consult_instruction": "تتبع زياراتك للطبيب والتشخيص.",
+        "consult_instruction": "تتبع زيارات الطبيب والتشخيص.",
         "save_button": "حفظ الاستشارة",
         "error_fill": "❌ يرجى تعبئة جميع الحقول قبل الحفظ.",
         "saved": "✅ تم حفظ الاستشارة.",
         "past_title": "📜 الاستشارات السابقة",
         "health_checks": "🧭 الفحوصات الوقائية الخاصة بك",
         "next_check": "الموعد التالي الموصى به: ",
-        "no_followup": "لا توجد متابعة منتظمة مطلوبة.",
-        "should_schedule": "📌 يجب أن تحدد موعدًا لفحص",
-        "summary_title": "📆 ملخص المواعيد القادمة للفحوصات",
+        "no_followup": "لا حاجة للمتابعة المنتظمة.",
+        "should_schedule": "📌 يجب تحديد موعد لـ",
+        "summary_title": "📆 تقويم الفحوصات القادمة",
         "file_uploaded": "✅ تم تحميل الملف.",
         "visit_date": "تاريخ الزيارة",
         "doctor_name": "اسم الطبيب",
@@ -84,36 +137,91 @@ translations = {
         "status": "الحالة",
         "done": "تم",
         "not_done": "لم يتم",
-        "why_is_important": "💡 لماذا هذا مهم؟"
+        "why_is_important": "💡 لماذا هذا مهم؟",
+        "view_uploaded": "📁 عرض الملفات المحملة",
+        "when_done": "✅ متى؟",
+        "recommended": "موصى به:",
+        "schedule_soon": "قريبًا.",
+        "date_format": "%Y/%m/%d",
+        "check_names": {
+            "Blood Pressure": "ضغط الدم",
+            "Cholesterol": "الكوليسترول",
+            "Diabetes": "السكري",
+            "Dental": "الأسنان",
+            "Eye Exam": "فحص العين",
+            "Skin Check": "فحص الجلد",
+            "Mental Health": "الصحة النفسية",
+            "Hearing Test": "اختبار السمع",
+            "Colonoscopy": "تنظير القولون",
+            "Thyroid": "الغدة الدرقية",
+            "Hepatitis": "التهاب الكبد",
+            "Flu Vaccine": "لقاح الإنفلونزا",
+            "BMI": "مؤشر كتلة الجسم",
+            "Kidney": "الكلى",
+            "Vitamin D": "فيتامين د",
+            "Sleep Health": "النوم",
+            "Bone Density": "كثافة العظام",
+            "Breast Exam": "فحص الثدي",
+            "Cervical Pap": "مسحة عنق الرحم",
+            "Prostate Exam": "فحص البروستاتا"
+        }
     },
     "amz": {
-        "upload_title": "📤 ⵉⵖⵔⵉ ⵓⵎⴰⵣⵉⵖ ⵓⵙⴻⴷⴷⵉⵏ",
-        "upload_instruction": "ⵓⵎⴰⵣⵉⵖ ⵓⵙⴻⴷⴷⵉⵏ ⵓⵎⴰⵣⵉⵖ ⴰⵏ ⵙⴻⵎⵙⴰⵏ ⵓⵙⴻⴷⴷⵉⵏ. Limit 200MB per file • PDF, JPG, JPEG, PNG.",
-        "consult_title": "🩺 ⵉⴷⵉ ⵉⵙⵉⵎⵎⵉⵏ ⵏ ⵉⵙⴻⴷⴷⵉⵏ",
-        "consult_instruction": "ⵓⵎⵎⴰⵣⵉⵖ ⵙⴰⵎⵓⵣⵓ ⵏ ⵙⴻⵎⵙⴰⵏ ⴰⵏ ⵉⵙⵉⵎⵎⵉⵏ.",
-        "save_button": "ⵙⴻⵎⵙ ⵉⵙⵉⵎⵎⵉⵏ",
-        "error_fill": "❌ ⵉⵎⴻⴼ ⵉⴽⴻⵔⴼ ⵓⵙⴻⴷⴷⵉⵏ ⵉⵏ ⵉⴷⵔⴰⵙ ⵓⴽⴰ ⵢⴰⵏⵙⵙ.",
-        "saved": "✅ ⵉⵙⵉⵎⵎⵉⵏ ⵙⴻⵎⵙⴰⵏ.",
+        "upload_title": "📤 ⵉⵖⵔⵉ ⵓⵎⴰⵣⵉⵖ",
+        "upload_instruction": "ⵓⵎⴰⵣⵉⵖ PDF, JPG, PNG ⴷ 200MB ⵏ ⴰⴼⵍⴽ.",
+        "consult_title": "🩺 ⴰⴷⵔⴰⵡ ⵏ ⵉⵙⵉⵎⵎⵉⵏ",
+        "consult_instruction": "ⵙⴰⵎⵓⵣⵓ ⴰⵏ ⵉⵙⵉⵎⵎⵉⵏ ⴷ ⴰⴳⵔⴰⵣ ⴰⵏⵓⴷ.",
+        "save_button": "ⵙⴻⵎⵙ",
+        "error_fill": "❌ ⴰⵏⴼⵉⴼ ⴰⴳⴷⵔⴰ ⵓⵙⴻⴷⴷⵉⵏ ⵏ.",
+        "saved": "✅ ⵙⴻⵎⵙ ⵓⵙⵙⴰⵏ.",
         "past_title": "📜 ⵓⴷⴰⵔⴰⵡ ⵏ ⵉⵙⵉⵎⵎⵉⵏ",
-        "health_checks": "🧭 ⵓⵎⵎⴰⵍⴰ ⵏ ⴽⵕⴰⵙ ⵏ ⴰⵣⵓⵍ",
-        "next_check": "ⴰⵎⵙⵙⵓ ⴳ ⵉⵎⵣⵣⴰⵡ ⴰⵙⴻⵎⵎⴰⴷ : ",
-        "no_followup": "ⵓⵙⵎⵎⴰⴷ ⴰⵙⵉⵎⵎⵉ ⴰⴷⴰⵔⴰⵡ.",
+        "health_checks": "🧭 ⵓⵙⵙⴰⵏ ⵏ ⵓⵙⵎⵎⴰⵏ",
+        "next_check": "ⴰⵎⵙⵙⵓ ⴳ ⵉⵎⵣⵣⴰⵡ: ",
+        "no_followup": "ⵓⵙⵎⵎⴰⴷ ⴰⴷⴰⵔⴰⵡ.",
         "should_schedule": "📌 ⵉⴼⴰⵍ ⴰⵎⵙⵙⵓ ⵏ",
-        "summary_title": "📆 ⵙⴻⵎⵙⴰⵏ ⵏ ⵉⵎⵣⵣⴰⵡⵏ : ⵏⵏⵉ ⴰⵎⵙⵙⵓⵏ ⴰⴷⴰⵔⴰⵡ",
-        "file_uploaded": "✅ ⵉⵙⵉⵎⵎⵉⵏ ⵙⴻⵎⵙⴰⵏ.",
+        "summary_title": "📆 ⵙⴻⵎⵙⴰⵏ ⵏ ⵉⵎⵣⵣⴰⵡⵏ",
+        "file_uploaded": "✅ ⴰⵎⴰⵣⵉⵖ ⴰⴷⵔⴰⵡ.",
         "visit_date": "ⵉⵎⵣⵣⴰⵡ ⵏ ⵓⵎⵎⵣⵉ",
-        "doctor_name": "ⵓⵎⵎⴰⵣⵉⵖ ⵓⵙⵎⵓⵣⵓ",
+        "doctor_name": "ⵓⵎⵎⴰⵣⵉⵖ",
         "specialty": "ⵙⵙⴻⵎⴰⵡ",
-        "clinic": "ⵉⵙⴻ⵷ ⴰⵏ ⵏⵉⵙⵎⴰⵙ",
-        "notes": "ⵎⵓⵣⵓ ⵓⵎⵎⴰⵣⵉⵖ / ⵙⵓⵛⴰⵎ",
+        "clinic": "ⵓⵎⵎⵙⴰⵏ",
+        "notes": "ⴰⵙⵎⴰⵍ / ⴰⴳⵔⴰⵣ",
         "status": "ⵎⵓⵣⵓ",
-        "done": "ⵎⵓⵣⵓ ⵇⴰⵛⴰ",
+        "done": "ⵙⴻⵎⵙ",
         "not_done": "ⵇⵓⵙⵎ",
-        "why_is_important": "💡 ⵉⵎⴻⴼ ⵉⴽⴻⵔⴼ ⵓⵙⴻⴷⴷⵉⵏ ⵏ"
+        "why_is_important": "💡 ⵉⵎⴻⴼ ⵉⴽⴻⵔⴼ ⵓⵙⴻⴷⴷⵉⵏ ⵏ",
+        "view_uploaded": "📁 ⵓⴷⴰⵔⴰⵡ ⵏ ⴰⵎⴰⵣⵉⵖⵏ",
+        "when_done": "✅ ⵓⴷⴷⴰⵔ ⴷ ⵓⴳⵔⴰⵣ?",
+        "recommended": "ⵉⵙⴰⵎⵎⴰⴷ:",
+        "schedule_soon": "ⵓⴷⴷⴰⵔ.",
+        "date_format": "%Y-%m-%d",
+        "check_names": {
+            "Blood Pressure": "ⵜⴰⵙⵉⵏⵜ ⴰⴼⴰⵙⴹ",
+            "Cholesterol": "ⴽⵍⵓⵙⵜⴻⵔⵉⵍ",
+            "Diabetes": "ⴰⵎⴰⵣⵉⵖ",
+            "Dental": "ⵜⴰⵣⵣⴰⵡⵜ ⵏ ⵜⵉⵣⵉⵣⵉⵏ",
+            "Eye Exam": "ⵜⴰⵣⵣⴰⵡⵜ ⵏ ⵜⵉⴼⵔⵉⵏ",
+            "Skin Check": "ⵜⴰⵣⵣⴰⵡⵜ ⵏ ⵜⴰⵏⴰⵡⵉⵢⵜ",
+            "Mental Health": "ⵜⴰⵙⵙⴰⵏⵜ ⵏ ⵓⵙⴻⵍⵍⵉⵏ",
+            "Hearing Test": "ⵜⴰⵙⵉⵏⵜ ⵏ ⵜⴰⵎⴰⵙⵜ",
+            "Colonoscopy": "ⵜⴰⵣⵡⴰⵍⵜ ⵏ ⵉⴽⵍⵉⵏ",
+            "Thyroid": "ⴰⵣⴷⵉⵡⵉⴷ",
+            "Hepatitis": "ⵜⴰⵣⴰⵍⵜ ⵏ ⴰⴷⴷⵔⴰⵡ",
+            "Flu Vaccine": "ⵜⴰⵎⴰⵣⵉⵖⵜ ⵏ ⴰⵍⴼⵍⵓ",
+            "BMI": "ⵉⵎⵙⴰⵡ ⵏ ⵜⴰⵙⵙⵓⵏⵜ",
+            "Kidney": "ⵜⴰⴳⴻⵎⵜ",
+            "Vitamin D": "ⴼⵉⵜⴰⵎⵉⵏ D",
+            "Sleep Health": "ⵜⴰⵙⵙⴰⵏⵜ ⵏ ⵜⵉⵎⵎⵉ",
+            "Bone Density": "ⵉⵙⵎⴰⵍ ⵏ ⴰⴼⵔⴰⴷ",
+            "Breast Exam": "ⵜⴰⵣⵣⴰⵡⵜ ⵏ ⵓⴷⵙⴰⵏ",
+            "Cervical Pap": "ⵜⴰⵙⵉⵏⵜ ⵏ ⵓⴽⴽⴰⵡ",
+            "Prostate Exam": "ⵜⴰⵣⵣⴰⵡⵜ ⵏ ⵜⵓⴽⵍⵍⵉⵎⵓⵏ"
+        }
     }
 }
 
 t = translations.get(lang, translations["en"])
+check_names = t["check_names"]
 
 # --- Profile ---
 profile = st.session_state.get("user_profile", {})
@@ -124,8 +232,10 @@ weight = profile.get("weight", 70)
 # --- Upload Files ---
 st.subheader(t["upload_title"])
 st.caption(t["upload_instruction"])
+
 if "documents" not in st.session_state:
     st.session_state.documents = []
+
 file = st.file_uploader(t["upload_title"], type=["pdf", "jpg", "jpeg", "png"])
 if file:
     st.session_state.documents.append({
@@ -134,14 +244,16 @@ if file:
         "date": datetime.date.today()
     })
     st.success(t["file_uploaded"])
+
 if st.session_state.documents:
-    with st.expander("📁 View Uploaded Files"):
+    with st.expander(t["view_uploaded"]):
         for doc in st.session_state.documents:
             st.markdown(f"📄 **{doc['name']}** — {doc['type']} on {doc['date']}")
 
 # --- Consultations ---
 st.subheader(t["consult_title"])
 st.caption(t["consult_instruction"])
+
 if "consultations" not in st.session_state:
     st.session_state.consultations = []
 
@@ -154,7 +266,6 @@ with st.form("consult_form"):
         specialty = st.text_input(t["specialty"])
         clinic = st.text_input(t["clinic"])
     notes = st.text_area(t["notes"])
-
     submitted = st.form_submit_button(t["save_button"])
     if submitted:
         if not doctor.strip() or not specialty.strip() or not clinic.strip() or not notes.strip():
@@ -219,8 +330,10 @@ def add_interval(date, code):
 
 # --- Preventive Checks UI ---
 st.subheader(t["health_checks"])
+
 if "preventive_status" not in st.session_state:
     st.session_state.preventive_status = {}
+
 if "preventive_dates" not in st.session_state:
     st.session_state.preventive_dates = {}
 
@@ -228,29 +341,30 @@ summary = []
 all_done = True
 
 for name, icon, interval, freq, reason in get_checks(age, gender, weight):
-    st.markdown(f"<div style='background:#ecfdf5;border-left:5px solid #10b981;padding:1rem;border-radius:10px;'>", unsafe_allow_html=True)
+    translated_name = check_names.get(name, name)
+    st.markdown("<div style='background:#ecfdf5;border-left:5px solid #10b981;padding:1rem;border-radius:10px;'>", unsafe_allow_html=True)
     col1, col2 = st.columns([5, 2])
-    col1.markdown(f"### {icon} {name}")
-    col1.markdown(f"_Recommended: {freq}_")
+    col1.markdown(f"### {icon} {translated_name}")
+    col1.markdown(f"*{t['recommended']} {freq}*")
     if st.button(t["why_is_important"], key=f"why_{name}"):
         st.info(reason)
     status = col2.radio(t["status"], [t["not_done"], t["done"]], key=f"status_{name}")
     st.session_state.preventive_status[name] = status
     if status == t["done"]:
-        done_date = col2.date_input("✅ When?", key=f"date_{name}", value=datetime.date.today())
+        done_date = col2.date_input(t["when_done"], key=f"date_{name}", value=datetime.date.today())
         next_due = add_interval(done_date, interval)
         if next_due:
-            st.success(f"{t['next_check']}{next_due.strftime('%Y-%m-%d')}")
-            summary.append((name, next_due))
+            st.success(f"{t['next_check']}{next_due.strftime(t['date_format'])}")
+            summary.append((translated_name, next_due))
             st.session_state.preventive_dates[name] = next_due
         else:
             st.info(t["no_followup"])
     else:
         all_done = False
-        st.warning(f"{t['should_schedule']} **{name}** soon.")
+        st.warning(f"{t['should_schedule']} **{translated_name}** {t['schedule_soon']}")
     st.markdown("</div>", unsafe_allow_html=True)
 
 if all_done and summary:
     st.subheader(t["summary_title"])
     for name, date in sorted(summary, key=lambda x: x[1]):
-        st.markdown(f"- 🗓️ **{name}** → {date.strftime('%B %d, %Y')}")
+        st.markdown(f"- 🗓️ **{name}** → {date.strftime(t['date_format'])}")

@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Douleur thoracique",
+    "category": "Douleur thoracique",
+    "description": "La douleur thoracique peut indiquer une angine de poitrine, une crise cardiaque ou une autre urgence médicale.",
+    "advice": "Appelez les urgences immédiatement si la douleur thoracique est intense, soudaine ou accompagnée de nausées, sueurs ou essoufflement."
+  },
+  {
+    "name": "Palpitations",
+    "category": "Douleur thoracique",
+    "description": "Les palpitations sont des battements cardiaques rapides, irréguliers ou forts qui peuvent être causés par le stress, la fièvre ou une arythmie.",
+    "advice": "Évitez les stimulants comme la caféine et consultez un cardiologue si les palpitations sont fréquentes ou accompagnées d'étourdissements."
+  },
+  {
+    "name": "Hypertension",
+    "category": "Douleur thoracique",
+    "description": "L'hypertension artérielle est une pression sanguine élevée pouvant endommager les artères, le cœur et les reins avec le temps.",
+    "advice": "Surveillez régulièrement votre tension artérielle, réduisez le sel dans votre alimentation et consultez votre médecin pour un traitement adapté."
+  },
+  {
+    "name": "Hypotension",
+    "category": "Douleur thoracique",
+    "description": "Une pression artérielle basse peut provoquer des étourdissements, des évanouissements et indiquer une déshydratation ou un trouble cardiaque.",
+    "advice": "Buvez beaucoup d’eau, évitez les levers brusques, et consultez un médecin si vous ressentez des malaises fréquents."
+  },
+  {
+    "name": "Gonflement des jambes",
+    "category": "Douleur thoracique",
+    "description": "Le gonflement des jambes peut être causé par une rétention d’eau, une insuffisance veineuse ou une défaillance cardiaque.",
+    "advice": "Surélevez vos jambes, limitez le sel, et consultez un médecin si l’enflure est douloureuse ou unilatérale."
+  },
+  {
+    "name": "Essoufflement",
+    "category": "Essoufflement",
+    "description": "Essoufflement est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de essoufflement."
+  },
+  {
+    "name": "Sifflement",
+    "category": "Essoufflement",
+    "description": "Sifflement est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de sifflement."
+  },
+  {
+    "name": "Toux",
+    "category": "Essoufflement",
+    "description": "Toux est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de toux."
+  },
+  {
+    "name": "Crachat de sang",
+    "category": "Essoufflement",
+    "description": "Crachat de sang est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de crachat de sang."
+  },
+  {
+    "name": "Oppression thoracique",
+    "category": "Essoufflement",
+    "description": "Oppression thoracique est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de oppression thoracique."
+  },
+  {
+    "name": "Mal de tête",
+    "category": "Mal de tête",
+    "description": "Mal de tête est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de mal de tête."
+  },
+  {
+    "name": "Crises",
+    "category": "Mal de tête",
+    "description": "Crises est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de crises."
+  },
+  {
+    "name": "Vertige",
+    "category": "Mal de tête",
+    "description": "Vertige est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de vertige."
+  },
+  {
+    "name": "Engourdissement",
+    "category": "Mal de tête",
+    "description": "Engourdissement est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de engourdissement."
+  },
+  {
+    "name": "Confusion",
+    "category": "Mal de tête",
+    "description": "Confusion est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de confusion."
+  },
+  {
+    "name": "Nausée",
+    "category": "Nausée",
+    "description": "Nausée est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de nausée."
+  },
+  {
+    "name": "Vomissements",
+    "category": "Vomissements",
+    "description": "Vomissements est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de vomissements."
+  },
+  {
+    "name": "Diarrhée",
+    "category": "Diarrhée",
+    "description": "Diarrhée est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de diarrhée."
+  },
+  {
+    "name": "Constipation",
+    "category": "Constipation",
+    "description": "Constipation est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de constipation."
+  },
+  {
+    "name": "Douleur abdominale",
+    "category": "Douleur abdominale",
+    "description": "Douleur abdominale est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de douleur abdominale."
+  },
+  {
+    "name": "Éruption cutanée",
+    "category": "Éruption cutanée",
+    "description": "Éruption cutanée est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de éruption cutanée."
+  },
+  {
+    "name": "Démangeaisons",
+    "category": "Démangeaisons",
+    "description": "Démangeaisons est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de démangeaisons."
+  },
+  {
+    "name": "Peau sèche",
+    "category": "Peau sèche",
+    "description": "Peau sèche est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de peau sèche."
+  },
+  {
+    "name": "Cloques",
+    "category": "Cloques",
+    "description": "Cloques est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de cloques."
+  },
+  {
+    "name": "Rougeur",
+    "category": "Rougeur",
+    "description": "Rougeur est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de rougeur."
+  },
+  {
+    "name": "Douleur articulaire",
+    "category": "Douleur articulaire",
+    "description": "Douleur articulaire est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de douleur articulaire."
+  },
+  {
+    "name": "Mal de dos",
+    "category": "Mal de dos",
+    "description": "Mal de dos est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de mal de dos."
+  },
+  {
+    "name": "Douleur au cou",
+    "category": "Douleur au cou",
+    "description": "Douleur au cou est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de douleur au cou."
+  },
+  {
+    "name": "Crampes musculaires",
+    "category": "Crampes musculaires",
+    "description": "Crampes musculaires est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de crampes musculaires."
+  },
+  {
+    "name": "Mobilité réduite",
+    "category": "Mobilité réduite",
+    "description": "Mobilité réduite est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de mobilité réduite."
+  },
+  {
+    "name": "Fatigue",
+    "category": "Fatigue",
+    "description": "Fatigue est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de fatigue."
+  },
+  {
+    "name": "Prise de poids",
+    "category": "Prise de poids",
+    "description": "Prise de poids est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de prise de poids."
+  },
+  {
+    "name": "Perte de poids",
+    "category": "Perte de poids",
+    "description": "Perte de poids est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de perte de poids."
+  },
+  {
+    "name": "Perte de cheveux",
+    "category": "Perte de cheveux",
+    "description": "Perte de cheveux est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de perte de cheveux."
+  },
+  {
+    "name": "Intolérance au froid",
+    "category": "Intolérance au froid",
+    "description": "Intolérance au froid est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de intolérance au froid."
+  },
+  {
+    "name": "Mictions fréquentes",
+    "category": "Mictions fréquentes",
+    "description": "Mictions fréquentes est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de mictions fréquentes."
+  },
+  {
+    "name": "Mictions douloureuses",
+    "category": "Mictions douloureuses",
+    "description": "Mictions douloureuses est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de mictions douloureuses."
+  },
+  {
+    "name": "Sang dans les urines",
+    "category": "Sang dans les urines",
+    "description": "Sang dans les urines est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de sang dans les urines."
+  },
+  {
+    "name": "Urgence urinaire",
+    "category": "Urgence urinaire",
+    "description": "Urgence urinaire est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de urgence urinaire."
+  },
+  {
+    "name": "Incontinence",
+    "category": "Incontinence",
+    "description": "Incontinence est un symptôme qui peut avoir plusieurs causes selon le contexte médical.",
+    "advice": "Consultez un professionnel de santé pour évaluer les causes possibles de incontinence."
+  }
+]
