@@ -1,8 +1,11 @@
+
 import streamlit as st
 import datetime
 import random
 import time
 import os
+import json
+
 
 # --- Language setup ---
 if "lang" not in st.session_state:
@@ -194,19 +197,41 @@ st.success(T["mood_messages"][mood])
 
 st.subheader(t("journal"))
 entry = st.text_area(t("write"))
+# --- Load journal from file if exists ---
+journal_path = "mental_journals.json"
+username = st.session_state.get("user", "guest")
 
+if os.path.exists(journal_path):
+    with open(journal_path, "r") as f:
+        all_journals = json.load(f)
+else:
+    all_journals = {}
+
+# Load user journal or empty list
+journal = all_journals.get(username, [])
+
+# Initialize session journal (for current session display)
 if "journal" not in st.session_state:
-    st.session_state.journal = []
+    st.session_state.journal = journal
+
 
 if st.button(t("save")):
     if entry.strip():
-        st.session_state.journal.append({
+        new_entry = {
             "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
             "text": entry
-        })
+        }
+        st.session_state.journal.append(new_entry)
+
+        # Save to file
+        all_journals[username] = st.session_state.journal
+        with open(journal_path, "w") as f:
+            json.dump(all_journals, f, indent=4)
+
         st.success(t("saved"))
     else:
         st.warning(t("warning"))
+
 
 if st.session_state.journal:
     st.subheader(t("reflections"))
@@ -267,3 +292,20 @@ st.subheader(t("tip"))
 st.info(random.choice(T.get("tips", [])))
 
 st.markdown(f"<div style='text-align:center;color:gray;margin-top:2rem'>{t('footer')}</div>", unsafe_allow_html=True)
+# --- Ensure lang is defined (just in case)
+lang = st.session_state.get("lang", "en")
+
+# --- Logout translations
+logout_labels = {
+    "en": "🚪 Logout",
+    "fr": "🚪 Se déconnecter",
+    "ar": "🚪 تسجيل الخروج",
+    "amz": "🚪 ⴰⵙⴼⵓⵙ"
+}
+logout_label = logout_labels.get(lang, "🚪 Logout")
+
+# --- Logout Button ---
+st.markdown("---")
+if st.button(logout_label):
+    st.session_state.clear()
+    st.switch_page("app.py")

@@ -1,3 +1,4 @@
+
 import streamlit as st
 import json
 import os
@@ -94,3 +95,20 @@ if symptom:
 
 st.markdown("---")
 st.markdown(f"<p style='text-align:center'>{T['footer']}</p>", unsafe_allow_html=True)
+# --- Ensure lang is defined (just in case)
+lang = st.session_state.get("lang", "en")
+
+# --- Logout translations
+logout_labels = {
+    "en": "🚪 Logout",
+    "fr": "🚪 Se déconnecter",
+    "ar": "🚪 تسجيل الخروج",
+    "amz": "🚪 ⴰⵙⴼⵓⵙ"
+}
+logout_label = logout_labels.get(lang, "🚪 Logout")
+
+# --- Logout Button ---
+st.markdown("---")
+if st.button(logout_label):
+    st.session_state.clear()
+    st.switch_page("app.py")

@@ -1,4 +1,6 @@
+
 import streamlit as st
+
 import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -368,3 +370,21 @@ if all_done and summary:
     st.subheader(t["summary_title"])
     for name, date in sorted(summary, key=lambda x: x[1]):
         st.markdown(f"- 🗓️ **{name}** → {date.strftime(t['date_format'])}")
+# --- Ensure lang is defined (just in case)
+lang = st.session_state.get("lang", "en")
+
+# --- Logout translations
+logout_labels = {
+    "en": "🚪 Logout",
+    "fr": "🚪 Se déconnecter",
+    "ar": "🚪 تسجيل الخروج",
+    "amz": "🚪 ⴰⵙⴼⵓⵙ"
+}
+logout_label = logout_labels.get(lang, "🚪 Logout")
+
+# --- Logout Button ---
+st.markdown("---")
+if st.button(logout_label):
+    st.session_state.clear()
+    st.switch_page("app.py")
+

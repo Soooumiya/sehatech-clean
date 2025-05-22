@@ -1,0 +1,42 @@
+{
+    "null": {
+        "documents": [],
+        "consultations": [],
+        "preventive_status": {
+            "Blood Pressure": "Not Done",
+            "Cholesterol": "Not Done",
+            "Diabetes": "Not Done",
+            "Dental": "Not Done",
+            "Eye Exam": "Not Done",
+            "Skin Check": "Not Done",
+            "Mental Health": "Not Done",
+            "Thyroid": "Not Done",
+            "Hepatitis": "Not Done",
+            "Flu Vaccine": "Not Done",
+            "Kidney": "Not Done",
+            "Vitamin D": "Not Done",
+            "Sleep Health": "Not Done"
+        },
+        "preventive_dates": {}
+    },
+    "null": {
+        "documents": [],
+        "consultations": [],
+        "preventive_status": {
+            "Blood Pressure": "Not Done",
+            "Cholesterol": "Not Done",
+            "Diabetes": "Not Done",
+            "Dental": "Not Done",
+            "Eye Exam": "Not Done",
+            "Skin Check": "Not Done",
+            "Mental Health": "Not Done",
+            "Thyroid": "Not Done",
+            "Hepatitis": "Not Done",
+            "Flu Vaccine": "Not Done",
+            "Kidney": "Not Done",
+            "Vitamin D": "Not Done",
+            "Sleep Health": "Not Done"
+        },
+        "preventive_dates": {}
+    }
+}

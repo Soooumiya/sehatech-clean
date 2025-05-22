@@ -3,9 +3,22 @@ from PIL import Image
 import base64
 import os
 
-st.set_page_config(page_title="SehaTech – Smart Health Assistant", layout="wide")
+# ─── 1. PAGE CONFIG ───────────────────────────────────────────────────────────
+st.set_page_config(
+    page_title="SehaTech – Smart Health Assistant",
+    layout="wide",
+)
 
-# --- Language Data ---
+# ─── 2. HIDE STREAMLIT SIDEBAR ────────────────────────────────────────────────
+st.markdown("""
+    <style>
+    [data-testid="stSidebarNav"] {
+        display: none;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# ─── 3. TRANSLATIONS ──────────────────────────────────────────────────────────
 languages = {
     "en": {
         "label": "🇺🇸 English",
@@ -34,37 +47,34 @@ languages = {
     "amz": {
         "label": "ⵣ Amazigh",
         "tagline": "ⵜⴰⵎⴰⵣⵉⵖⵜ ⵏ ⵓⵙⴻⵍⵍⵉⵏ",
-        "subtitle": "ⵙⴻⵀⴰⵜⴻⴽ ⵓⴷⵔⴰⴽ ⵏ ⵓⵣⵔⴰⵡ ⴷ ⵉⴷⵔⴻⵏ ⵏ ⵜⴰⵎⴰⵣⵉⵖⵜ",
+        "subtitle": "ⵙⴻⵀⴰⵜⴻⴽ ⵓⴷⵔⴰⵏ ⵏ ⵓⵣⵔⴰⵡ ⴷ ⵉⴷⵔⴻⵏ ⵏ ⵜⴰⵎⴰⵣⵉⵖⵜ",
         "start": "ⴰⴼⴻⵙ",
         "choose_lang": "ⴰⴼⵓⵙ ⵜⵉⵣⵉⵏⵜ",
         "footer": "© 2025 ⵙⴻⵀⴰⵜⴻⴽ. ⵙⵉⵏⴰⴹ Soumiya"
     }
 }
 
-# --- Session: Default Language ---
+# ─── 4. SESSION DEFAULTS ─────────────────────────────────────────────────────
 if "lang" not in st.session_state:
     st.session_state["lang"] = "en"
+lang = st.session_state["lang"]
 
-# --- Language Selection ---
-lang_keys = list(languages.keys())
+# ─── 5. LANGUAGE SELECTBOX ────────────────────────────────────────────────────
+lang_keys   = list(languages.keys())
 lang_labels = [languages[k]["label"] for k in lang_keys]
-selected_index = lang_keys.index(st.session_state["lang"])
-selected_label = st.selectbox("🌐 " + languages["en"]["choose_lang"], lang_labels, index=selected_index)
+selected_index = lang_keys.index(lang)
+selected_label = st.selectbox(
+    f"🌐 {languages['en']['choose_lang']}",
+    lang_labels,
+    index=selected_index,
+    key="lang_selectbox",
+    on_change=lambda: st.session_state.update(lang=lang_keys[lang_labels.index(st.session_state["lang_selectbox"])])
+)
+# update session_state["lang"] based on selection
+st.session_state["lang"] = lang_keys[lang_labels.index(selected_label)]
+l = languages[st.session_state["lang"]]
 
-# --- Update selected language ---
-selected_lang = [k for k in lang_keys if languages[k]["label"] == selected_label][0]
-st.session_state["lang"] = selected_lang
-l = languages[selected_lang]
-
-# --- Helper: Image to base64 ---
-def get_image_base64(img_path):
-    if not os.path.exists(img_path):
-        return ""
-    with open(img_path, "rb") as img_file:
-        encoded = base64.b64encode(img_file.read()).decode()
-    return encoded
-
-# --- CSS ---
+# ─── 6. CSS STYLING ───────────────────────────────────────────────────────────
 st.markdown("""
     <style>
     .center-box {
@@ -141,18 +151,22 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Main UI ---
+# ─── 7. MAIN UI ───────────────────────────────────────────────────────────────
 st.markdown("<div class='center-box'>", unsafe_allow_html=True)
-logo_b64 = get_image_base64("sehatech_logo.png")
-if logo_b64:
-    st.markdown(f"<img class='logo' src='data:image/png;base64,{logo_b64}'/>", unsafe_allow_html=True)
+
+# logo
+logo_path = "sehatech_logo.png"
+if os.path.exists(logo_path):
+    img_b64 = base64.b64encode(open(logo_path, "rb").read()).decode()
+    st.markdown(f"<img class='logo' src='data:image/png;base64,{img_b64}'/>", unsafe_allow_html=True)
 
 st.markdown(f"<div class='title'>🏥 SehaTech</div>", unsafe_allow_html=True)
 st.markdown(f"<div class='tagline'>{l['tagline']}</div>", unsafe_allow_html=True)
 st.markdown(f"<div class='subtitle typewriter'>{l['subtitle']}</div>", unsafe_allow_html=True)
 
+# Get Started button
 if st.button(l["start"]):
-    st.switch_page("pages/1_User_Info.py")
+    st.switch_page("pages/0_Login.py")
 
 st.markdown("</div>", unsafe_allow_html=True)
 st.markdown(f"<div class='footer'>{l['footer']}</div>", unsafe_allow_html=True)
